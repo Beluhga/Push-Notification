@@ -8,9 +8,15 @@ import { THEME } from './src/theme';
 import { Loading } from './src/components/Loading';
 
 import { CartContextProvider } from './src/contexts/CartContext';
+import { useEffect } from 'react';
+import { OneSignal } from 'react-native-onesignal';
+
+OneSignal.initialize('3b6baef0-8267-4e15-a210-5c8c1db89c71');
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
+
+  useEffect
 
   return (
     <NativeBaseProvider theme={THEME}>

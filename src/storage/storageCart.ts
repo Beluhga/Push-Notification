@@ -22,7 +22,7 @@ export async function storageProductGetAll() {
   }
 }
 
-export async function storageProductSave(newProduct: StorageCartProps) {
+export async function storageProductSave(newProduct: StorageCartProps) { // guarda produto
   try {
     let products = await storageProductGetAll();
 
@@ -49,7 +49,7 @@ export async function storageProductSave(newProduct: StorageCartProps) {
   }
 }
 
-export async function storageProductRemove(productId: string) {
+export async function storageProductRemove(productId: string) { // remover produto
   try {
     const products = await storageProductGetAll();
 

@@ -20,18 +20,18 @@ type CartContextProviderProps = {
 export const CartContext = createContext<CartContextDataProps>({} as CartContextDataProps);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<StorageCartProps[]>([]);
+  const [cart, setCart] = useState<StorageCartProps[]>([]); // produtos que estao sendo adicionados no carrinho
 
   async function addProductCart(newProduct: StorageCartProps) {
     try {
-      const storageResponse = await storageProductSave(newProduct);
+      const storageResponse = await storageProductSave(newProduct); // adicionar o produto
       setCart(storageResponse);
     } catch (error) {
       throw error;
     }
   }
 
-  async function removeProductCart(productId: string) {
+  async function removeProductCart(productId: string) {  // remover o produto
     try {
       const response = await storageProductRemove(productId);
       setCart(response);

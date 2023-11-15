@@ -18,6 +18,7 @@ type RouteParamsProps = {
 }
 
 export function Details() {
+  // produtos especificos ao clicar
   const [size, setSize] = useState('35');
   const [quantity, setQuantity] = useState('1');
   const [product, setProduct] = useState<ProductCardProps>({} as ProductCardProps);
