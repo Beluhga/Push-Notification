@@ -6,6 +6,7 @@ import {
   storageProductRemove,
   storageProductGetAll,
 } from '../storage/storageCart';
+import { tagCartUpdate } from '../notifications/notificationsTags';
 
 export type CartContextDataProps = {
   addProductCart: (newProduct: StorageCartProps) => Promise<void>;
@@ -20,21 +21,26 @@ type CartContextProviderProps = {
 export const CartContext = createContext<CartContextDataProps>({} as CartContextDataProps);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<StorageCartProps[]>([]); // produtos que estao sendo adicionados no carrinho
+  const [cart, setCart] = useState<StorageCartProps[]>([]); 
 
   async function addProductCart(newProduct: StorageCartProps) {
     try {
-      const storageResponse = await storageProductSave(newProduct); // adicionar o produto
+      const storageResponse = await storageProductSave(newProduct);
       setCart(storageResponse);
+      tagCartUpdate(storageResponse.length.toString()); 
+
+      // newProduct.image => usa pra pode usar nome, imagem, etc
     } catch (error) {
       throw error;
     }
   }
 
-  async function removeProductCart(productId: string) {  // remover o produto
+  async function removeProductCart(productId: string) {  
     try {
       const response = await storageProductRemove(productId);
       setCart(response);
+      tagCartUpdate(response.length.toString()); // Removendo item do carrinho
+
     } catch (error) {
       throw error;
     }
